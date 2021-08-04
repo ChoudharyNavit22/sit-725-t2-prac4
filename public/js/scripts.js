@@ -1,17 +1,3 @@
-const cardList = [
-    {
-        title: "Kitten 2",
-        image: "images/kitten-2.jpg",
-        link: "About Kitten 2",
-        desciption: "Demo desciption about kitten 2"
-    },
-    {
-        title: "Kitten 3",
-        image: "images/kitten-3.jpg",
-        link: "About Kitten 3",
-        desciption: "Demo desciption about kitten 3"
-    }
-]
 const clickMe = () => {
     alert("Thanks for clicking me. Hope you have a nice day!")
 }
@@ -24,6 +10,14 @@ const submitForm = () => {
     formData.email = $('#email').val();
 
     console.log("Form Data Submitted: ", formData);
+}
+
+const getProjects = () => {
+    $.get('/api/projects',(response) => {
+        if(response.statusCode==200){
+            addCards(response.data);
+        }
+    })
 }
 
 const addCards = (items) => {
@@ -47,6 +41,6 @@ $(document).ready(function(){
     $('#formSubmit').click(()=>{
         submitForm();
     })
-    addCards(cardList);
+    getProjects();
     $('.modal').modal();
   });
