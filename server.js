@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require("express")
 var app = express()
 const MongoClient = require('mongodb').MongoClient;
@@ -5,7 +6,7 @@ let projectCollection;
 
 // Database Connection
 
-const uri = 'mongodb+srv://sit-725-2021:navc011337@sit-725-2021-week4.ydxie.mongodb.net/sit-725-2021-week4?retryWrites=true&w=majority'
+const uri = process.env.MONGO_URI
 const client = new MongoClient(uri,{ useNewUrlParser: true })
 
 app.use(express.static(__dirname+'/public'))
