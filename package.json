@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ChoudharyNavit22/sit725-2021-t2-prac4#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^4.1.0"
   }
 }
