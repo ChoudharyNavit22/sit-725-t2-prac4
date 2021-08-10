@@ -1,17 +1,19 @@
 require('dotenv').config()
 var express = require("express")
+var cors = require("cors")
 var app = express()
 const MongoClient = require('mongodb').MongoClient;
 let projectCollection;
 
 // Database Connection
 
-const uri = process.env.MONGO_URI
+const uri = process.env.MONGO_URI // replace it with the url you get from mongo atlas
 const client = new MongoClient(uri,{ useNewUrlParser: true })
 
 app.use(express.static(__dirname+'/public'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors())
 
 const createColllection = (collectionName) => {
     client.connect((err,db) => {
@@ -73,11 +75,12 @@ app.post('/api/projects',(req,res) => {
             res.json({statusCode: 200, message:"Project Successfully added", data: result})
         }
     })
+    //res.json({statusCode: 200, message:"Project Successfully added", data: newProject})
 })
 
 var port = process.env.port || 3000;
 
 app.listen(port,()=>{
     console.log("App listening to: "+port);
-    createColllection("projects")
+    createColllection("pets")
 })
